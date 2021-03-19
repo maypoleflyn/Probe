@@ -1,0 +1,28 @@
+Dependency
+
+01-Diamond:
+
+https://github.com/bbuchfink/diamond
+
+02-Meme
+
+https://meme-suite.org/meme/
+
+03-HMMER
+
+http://hmmer.org/
+
+04-R  
+
+R language for statistical computing
+R version 3.* must be available on the system and the binary executable in the system PATH.
+https://www.r-project.org/
+
+05-Python
+
+Python version 2.7 or higher
+
+06-iterativeWGCNA
+
+https://github.com/cstoeckert/iterativeWGCNA
+

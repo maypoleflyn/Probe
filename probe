@@ -1,0 +1,102 @@
+#!/usr/bin/perl
+
+use strict;
+use Getopt::Long;
+use FindBin;
+use lib "$FindBin::Bin/Perlib";
+use predict;
+use tfbs;
+use tfen;
+use reg;
+use net;
+
+my $G_USAGE = "
+
+Program: probe (Predict Regulators Based On Binding site and Expression)
+Version: 1.0
+
+Usage:   probe <command> [options]
+
+Commands:
+         predict     predict TFs from protein sequences        
+         tfbs        generate TFBS set for species 
+         tfen        conduct TF enrichment analysis using hypergeometric distribution
+         reg         Generate the transcriptional regulatory landscape based on the TFBS
+         net         Generate the regulatory network based on TFBS and hub genes  
+
+";
+
+my $command = undef;
+if (!defined $ARGV[0] || substr($ARGV[0],0,1) eq '-' || substr($ARGV[0],0,2) eq '--') {
+        die($G_USAGE);
+}
+$command = shift @ARGV; $command = lc $command;
+
+# auto-flush for both stderr and stdout
+ select(STDERR);
+ $| = 1;
+ select(STDOUT);
+ $| = 1;
+
+if('predict' eq $command){
+         runpredict();
+                       }
+if ('tfbs' eq $command) {
+        runtfbs();
+} elsif ('tfen' eq $command) {
+         runtfen();
+} elsif ('reg' eq $command){
+        runreg();
+                                                       
+} elsif ('net' eq $command) {
+         runnet();
+} else {
+  
+    print $G_USAGE;
+       }
+ 
+      
+  exit 0;
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                           
+
+##
+##      PROBE: Predict Regulators Based on Binding site and Expression
+##
+##      author: Fei Shen <352363546@qq.com>  
+##
+## Copyright (c) 2021 Beijing Agro-biotechnology Research Center
+##
+## Permission is hereby granted, free of charge, to any person obtaining a copy
+## of this software and associated documentation files (the "Software"), to deal
+## in the Software without restriction, including without limitation the rights
+## to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+## copies of the Software, and to permit persons to whom the Software is
+## furnished to do so, subject to the following conditions:
+## 
+## The above copyright notice and this permission notice shall be included in all
+## copies or substantial portions of the Software.
+## 
+## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+## IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+## FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+## AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+## LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+## OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+## SOFTWARE.
